@@ -16,8 +16,9 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -31,7 +32,7 @@
     <name>Gossip</name>
     <version>1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
-    
+
     <description>
         Gossip is a plugin for SLF4j which has simple and flexible configuration.
     </description>
@@ -40,7 +41,7 @@
         <name>Sonatype</name>
         <url>http://sonatype.org</url>
     </organization>
-    
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -56,12 +57,12 @@
         <developerConnection>scm:git:ssh://git@github.com/jdillon/gossip.git</developerConnection>
         <url>http://github.com/jdillon/gossip</url>
     </scm>
-    
+
     <ciManagement>
         <system>Hudson</system>
         <url>https://builds.sonatype.org/job/gossip/</url>
     </ciManagement>
-    
+
     <developers>
         <developer>
             <id>jdillon</id>
@@ -73,7 +74,7 @@
             </roles>
         </developer>
     </developers>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -133,7 +134,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <modules>
         <module>gossip-bootstrap</module>
         <module>gossip-bootstrap-slf4j</module>
@@ -142,7 +143,7 @@
         <module>gossip-slf4j</module>
         <module>gossip-extra</module>
     </modules>
-    
+
     <build>
         <defaultGoal>install</defaultGoal>
 
@@ -316,6 +317,42 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>zion-build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.0</version>
+                        <configuration>
+                            <nexusUrl>${zion.nexusUrl}</nexusUrl>
+                            <serverId>${zion.serverId}</serverId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <skipRemoteStaging>true</skipRemoteStaging>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
-    
+
 </project>
