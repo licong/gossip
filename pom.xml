@@ -333,10 +333,12 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.0</version>
+                        <version>1.1-SNAPSHOT</version>
+                        <extensions>true</extensions>
                         <configuration>
                             <nexusUrl>${zion.nexusUrl}</nexusUrl>
                             <serverId>${zion.serverId}</serverId>
+                            <skipRemoteStaging>true</skipRemoteStaging>
                         </configuration>
                         <executions>
                             <execution>
@@ -349,6 +351,26 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>zion-deploy</id>
+            <build>
+                <defaultGoal>nexus-staging:deploy-staged</defaultGoal>
+
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.1-SNAPSHOT</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <nexusUrl>${zion.nexusUrl}</nexusUrl>
+                            <serverId>${zion.serverId}</serverId>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
