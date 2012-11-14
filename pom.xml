@@ -183,6 +183,16 @@
             </testResource>
         </testResources>
 
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -324,6 +334,22 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <testFailureIgnore>true</testFailureIgnore>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <testFailureIgnore>true</testFailureIgnore>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
                         <configuration>
                             <skip>true</skip>
@@ -333,24 +359,13 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.1-SNAPSHOT</version>
                         <extensions>true</extensions>
                         <configuration>
+                            <skipRemoteStaging>true</skipRemoteStaging>
                             <nexusUrl>${zion.nexusUrl}</nexusUrl>
                             <serverId>${zion.serverId}</serverId>
-                            <skipRemoteStaging>true</skipRemoteStaging>
+                            <!--<altStagingDirectory>zwork/staging</altStagingDirectory>-->
                         </configuration>
-                        <executions>
-                            <execution>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                                <configuration>
-                                    <skipRemoteStaging>true</skipRemoteStaging>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -365,11 +380,11 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.1-SNAPSHOT</version>
                         <extensions>true</extensions>
                         <configuration>
                             <nexusUrl>${zion.nexusUrl}</nexusUrl>
                             <serverId>${zion.serverId}</serverId>
+                            <!--<altStagingDirectory>zwork/staging</altStagingDirectory>-->
                         </configuration>
                     </plugin>
                 </plugins>
