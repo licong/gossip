@@ -364,7 +364,7 @@
                             <skipRemoteStaging>true</skipRemoteStaging>
                             <nexusUrl>${zion.nexusUrl}</nexusUrl>
                             <serverId>${zion.serverId}</serverId>
-                            <!--<altStagingDirectory>zwork/staging</altStagingDirectory>-->
+                            <altStagingDirectory>${zion.stagingDirectory}</altStagingDirectory>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -384,7 +384,7 @@
                         <configuration>
                             <nexusUrl>${zion.nexusUrl}</nexusUrl>
                             <serverId>${zion.serverId}</serverId>
-                            <!--<altStagingDirectory>zwork/staging</altStagingDirectory>-->
+                            <altStagingDirectory>${zion.stagingDirectory}</altStagingDirectory>
                         </configuration>
                     </plugin>
                 </plugins>
